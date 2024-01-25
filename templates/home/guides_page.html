@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="progress-tracker">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp"> notifications </span> -->
+		</header>
+
+		<div class="wrapper">
+
+			<div class="is-flex items-center gap-16 mb-32">
+				<a href="{% url 'student:capstone_progress_page' %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">Guides</h1>
+			</div>
+			<section id="progress-info" class="mt-8">
+				<table>
+					<thead>
+						<tr>
+							<th>Step</th>
+							<th>Detailed Guide</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						{% for guide in guides %}
+							<tr>
+								<td style="text-align: center" data-cell="step_num" class="fs-16 fw-4">{{forloop.counter}}</td>
+								<td style="text-align: left" data-cell="step_guides" class="fs-16 fw-4">{{guide.content}}</td>
+								<td>{{guide.created_at|date:"m/d/Y"}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</section>
+
+		</div>
+	</main>
+{% endblock content %}

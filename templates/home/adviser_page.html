@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+	<main id="adviser">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp">
+				notifications
+			</span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="{% url 'student:advisers_page' %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+			</div>
+
+			<section class="is-flex-column items-center content-center gap-1">
+				<img class="profile-photo large" src="{{adviser.profile_picture.url}}" alt=""/>
+				<p class="fs-20 fw-4 pblc-8">{{adviser.username}}</p>
+			</section>
+
+			<section id="form-section">
+				<form method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+
+					{% for field in form %}
+						<div class="width-100">
+							<p class="fs-20 fw-4 pi-8 pblc-8">{{field.label}}</p>
+							{{field}}
+							<small class="input-error">{{field.errors.as_text}}</small>
+						</div>
+					{% endfor %}
+
+					<p class="fs-20 fw-4 pi-8 pblc-8">Insert Message:</p>
+					<textarea name="message" id="message" cols="30" rows="10"></textarea>
+
+					<div class="is-flex content-end pblc-8">
+						<button class="button" type="submit">Send Request</button>
+					</div>
+				</form>
+			</section>
+		</div>
+	</main>
+
+{% endblock content %}

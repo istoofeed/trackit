@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="approved-titles">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">Advisory</h1>
+			</div>
+
+			<div class="is-flex items-center content-between">
+				<div></div>
+
+				<div class="is-flex gap-8">
+					<a class="button" href="{% url 'administrator:create_groupadvisory_page' %}">Add</a>
+				</div>
+			</div>
+
+			<section id="titles">
+				<table>
+					<thead>
+						<tr>
+							<th>Group #</th>
+							<th>Members</th>
+							<th>Adviser</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						{% for group_advisory in group_advisories %}
+							<tr>
+								<td data-cell="task">{{group_advisory.group.name}}</td>
+								<td data-cell="d-start">
+									{% for member in group_advisory.group.members.all %}
+										{{member.name}}
+										{% if not forloop.last %}
+											,
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td data-cell="d-finish">{{group_advisory.adviser.name}}</td>
+								<td data-cell="d-finish">
+									<a href="{% url 'administrator:update_groupadvisory_page' group_advisory.id %}">
+										Edit&nbsp;
+									</a>
+									<a href="{% url 'administrator:delete_groupadvisory' group_advisory.id %}">Delete</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

@@ -1,0 +1,104 @@
+h1 {
+	font-size: var(--clc-36);
+	font-weight: var(--fw-light);
+}
+
+h2 {
+	font-size: var(--clc-24);
+	font-weight: var(--fw-light);
+}
+
+h3 {
+	font-size: var(--clc-18);
+	font-weight: var(--fw-regular);
+}
+
+.body-2,
+.menu {
+	font-size: var(--clc-16);
+	font-weight: var(--fw-bold);
+}
+
+.body-1 {
+	font-size: calc(14rem / 16);
+	font-weight: var(--fw-regular);
+}
+
+.caption {
+	font-size: var(--clc-12);
+	font-weight: var(--fw-regular);
+}
+
+/* Font Sizes */
+.fs-12 {
+	font-size: var(--clc-12);
+}
+
+.fs-14 {
+	font-size: calc(14rem / 16);
+}
+
+.fs-16 {
+	font-size: var(--clc-16);
+}
+
+.fs-18 {
+	font-size: var(--clc-18);
+}
+
+.fs-20 {
+	font-size: var(--clc-20);
+}
+
+.fs-24 {
+	font-size: var(--clc-24);
+}
+
+.fs-28 {
+	font-size: var(--clc-28);
+}
+
+.fs-32 {
+	font-size: var(--clc-32);
+}
+
+.fs-36 {
+	font-size: var(--clc-36);
+}
+
+.fs-40 {
+	font-size: var(--clc-40);
+}
+
+.fw-0 {
+	font-weight: var(--fw-light);
+}
+
+.fw-1 {
+	font-weight: var(--fw-regular);
+}
+
+.fw-2 {
+	font-weight: var(--fw-medium);
+}
+
+.fw-3 {
+	font-weight: var(--fw-bold);
+}
+
+.fw-4 {
+	font-weight: var(--fw-bolder);
+}
+
+/* Alignment */
+.is-text-center {
+	text-align: center;
+}
+
+.is-text-end {
+	text-align: end;
+}
+
+.is-text-start {
+	text-align: start;
+}

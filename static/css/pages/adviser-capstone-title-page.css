@@ -1,0 +1,61 @@
+#approved-titles #titles {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	margin-inline: auto;
+	margin-top: var(--clc-80);
+	border-radius: var(--clc-8);
+	background: var(--color-info-light);
+	border: 1px solid black;
+}
+
+#approved-titles #titles table {
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+
+#approved-titles #titles th:first-child {
+	border-radius: var(--clc-8) 0 0 0;
+}
+
+#approved-titles #titles th:last-child {
+	border-radius: 0 var(--clc-8) 0 0;
+}
+
+#approved-titles #titles th,
+#approved-titles #titles tr:nth-of-type(2n) {
+	background: var(--color-light);
+}
+
+#approved-titles #titles td,
+#approved-titles #titles th {
+	padding: var(--clc-16) var(--clc-8);
+}
+
+#approved-titles #titles tr,
+#approved-titles #titles th {
+	border-bottom: 1px solid black;
+}
+
+#approved-titles #titles tr:last-child {
+	border-bottom: none;
+}
+
+#approved-titles #titles tr:hover {
+	background: var(--color-info-dark);
+	cursor: default;
+}
+
+#approved-titles #titles tr:has(th):hover {
+	background: none;
+}
+
+#approved-titles #titles tr:last-child td:first-child {
+	border-radius: 0 0 0 var(--clc-8);
+}
+
+#approved-titles #titles tr:last-child td:last-child {
+	border-radius: 0 0 var(--clc-8) 0;
+}

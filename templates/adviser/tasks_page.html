@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="tasks">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">Lists of Tasks</h1>
+			</div>
+
+			<section id="progress-info" class="mt-32">
+				{% if tasks.count > 0 %}
+					<table>
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Deadline</th>
+								<th></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{% for task in tasks %}
+								<tr>
+									<td class="fs-16 fw-4">{{task.title|truncatechars:48}}</td>
+									<td class="fs-16 fw-4">{{task.deadline}}</td>
+									<td>
+										<a class="fs-14 fw-4" href="{% url 'adviser:users_tasks_page' task.id %}">View</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				{% else %}
+					<div class="is-flex-column items-center content-center gap-16">
+						<div class="card-box is-flex items-center content-center pi-48 pblc-16">
+							<p class="task-title | fs-16 fw-4">No Task Yet</p>
+
+						</div>
+					</div>
+				{% endif %}
+			</section>
+		</div>
+	</main>
+{% endblock content %}

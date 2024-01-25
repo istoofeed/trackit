@@ -1,0 +1,16 @@
+#advisers #advisers-list,
+#capstone-group #group-members,
+#advisories #group-list {
+	display: grid;
+	grid-template-columns: repeat(2, calc(400rem / 16));
+	gap: var(--clc-40);
+	justify-content: center;
+}
+
+#adviser #feedback-section form textarea {
+	border-radius: 8px;
+	background: transparent;
+	width: 100%;
+	padding: calc(16rem / 16) calc(24rem / 16);
+	appearance: none;
+}

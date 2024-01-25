@@ -1,0 +1,8 @@
+HTML:
+  beautifiers:
+    - JS-Beautify
+    - Pretty Diff
+
+  indent_size: 1
+  indent_char: " "
+  indent_style: "tab"

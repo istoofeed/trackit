@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="advisories">
+		<!-- MAIN CONTENT -->
+
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="adviser-advisory.html">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">Group 1 Name</h1>
+			</div>
+
+			<div class="is-flex content-end pblc-16">
+				<button class="button">
+					<a class="is-flex fw-2 color-reset gap-8" href="progress-tracker.html">
+						<p>Group Chat</p>
+						<span class="material-symbols-sharp">
+							chat
+						</span>
+					</a>
+				</button>
+			</div>
+
+			<section id="group-list">
+				<div class="card-box has-border pblc-32 is-flex-column items-center content-center is-text-center">
+					<img class="profile-photo large" src="./static/images/project-manager-profile.jpg" alt=""/>
+
+					<p class="fs-20 fw-4 pi-16">Michael Scott</p>
+					<p class="fs-12 fw-3">Project Manager</p>
+				</div>
+
+				<div class="card-box has-border pblc-32 is-flex-column items-center content-center is-text-center">
+					<img class="profile-photo large" src="./static/images/lead-noobgrammer-profile.jpg" alt=""/>
+
+					<p class="fs-20 fw-4 pi-16">Marcc Zuccerturd</p>
+					<p class="fs-12 fw-3">Lead Noobgrammer</p>
+				</div>
+
+				<div class="card-box has-border pblc-32 is-flex-column items-center content-center is-text-center">
+					<img class="profile-photo large" src="./static/images/ui-ux-profile.jpg" alt=""/>
+
+					<p class="fs-20 fw-4 pi-16">Kenough</p>
+					<p class="fs-12 fw-3">UI/UX Designer</p>
+				</div>
+
+				<div class="card-box has-border pblc-32 is-flex-column items-center content-center is-text-center">
+					<img class="profile-photo large" src="./static/images/qa-profile.jpg" alt=""/>
+
+					<p class="fs-20 fw-4 pi-16">Bertram Gilfoil</p>
+					<p class="fs-12 fw-3">QA Tester</p>
+				</div>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

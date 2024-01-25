@@ -1,0 +1,32 @@
+#capstone-title .titles {
+	text-align: center;
+	margin-top: var(--clc-32);
+	margin-inline: auto;
+	width: 80%;
+	border: 2px solid black;
+	border-radius: 8px;
+	padding: var(--clc-48) var(--clc-32);
+}
+
+#capstone-title .title {
+	display: none;
+}
+
+#capstone-title .title.active {
+	display: block;
+}
+
+#capstone-title .title .title-info {
+	display: grid;
+	height: 23vh;
+	grid-template-rows: 1fr auto auto;
+}
+
+#capstone-title .button {
+	color: black;
+}
+
+#capstone-title .title button:disabled {
+	color: rgb(184, 184, 184);
+	cursor: not-allowed;
+}

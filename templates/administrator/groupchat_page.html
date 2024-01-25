@@ -1,0 +1,81 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+	<main id="approved-titles">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="tasks.html">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">Create Group Chat</h1>
+			</div>
+
+			<div class="is-flex content-end pblc-24">
+				<a class="button has-icon fw-2 color-reset" href="progress-tracker.html">
+					<p>Message</p>
+					<span class="material-symbols-sharp">
+						chat
+					</span>
+				</a>
+			</div>
+
+			<div class="is-flex items-center content-between">
+				<div>
+					<form action="">
+						<a class="button pi-16" href="">Add Participant</a>
+						<input type="text"/>
+					</form>
+				</div>
+
+				<div class="is-flex gap-8">
+					<a class="button" href="adviser-create-task.html">Save</a>
+					<a class="button" href="">Edit</a>
+					<a class="button" href="">Remove</a>
+				</div>
+			</div>
+
+			<section id="titles">
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Type of User</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td class="is-flex items-center content-center gap-8" data-cell="task">
+								<span class="fill material-symbols-sharp">
+									add_box
+								</span>
+								User 1</td>
+							<td data-cell="d-start">Student</td>
+						</tr>
+						<tr>
+							<td class="is-flex items-center content-center gap-8" data-cell="task">
+								<span class="fill material-symbols-sharp">
+									add_box
+								</span>
+								User 2</td>
+							<td data-cell="d-start">Student</td>
+						</tr>
+						<tr>
+							<td class="is-flex items-center content-center gap-8" data-cell="task">
+								<span class="fill material-symbols-sharp">
+									add_box
+								</span>
+								User 3</td>
+							<td data-cell="d-start">Adviser</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

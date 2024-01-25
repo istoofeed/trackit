@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="advisories">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="{% url 'adviser:tasks_page' %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">{{task.title}}</h1>
+			</div>
+
+			<section id="tasks-section" class="pt-32">
+				<div class="is-flex-column items-center content-center gap-16">
+					{% if task.get_submitted_user_task_count > 0 %}
+						{% for usertask in task.usertask_set.all %}
+							{% if usertask.status == "For Revision" or usertask.status == "Submitted" %}
+								<div class="card-box width-80 is-flex items-center content-between pi-48 pblc-16">
+									<p class="task-title | fs-16 fw-4">{{usertask.student.name}}</p>
+
+									<p class="task-due | fs-16 fw-4">Submitted at:
+										{{usertask.submitted_at|date:"F d, Y h: i A"}}</p>
+
+									<a class="fs-14 fw-4" href="{% url 'adviser:usertask_details_page' usertask.id %}">View</a>
+									<!-- <span class="fill material-symbols-sharp"> lock </span> -->
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% else %}
+						<div class="card-box width-80 is-flex items-center content-center pi-48 pblc-16">
+							<p class="task-title | fs-16 fw-4">Noone Submitted Yet</p>
+
+						</div>
+					{% endif %}
+				</div>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

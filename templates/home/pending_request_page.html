@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+	<main id="adviser">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp">
+				notifications
+			</span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="{% url 'student:advisers_page' %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+			</div>
+
+			<div class="is-flex gap-24">
+				<section class="is-flex-column items-center content-center gap-1">
+					<img class="profile-photo large" src="{{pending_advisory.adviser.profile_picture.url}}" alt=""/>
+					<p class="fs-20 fw-4 pblc-8">{{pending_advisory.adviser.name}}</p>
+				</section>
+
+				{% include "home/htmx/read_pending_advisory.html" %}
+			</div>
+
+			<section id="groupchat" class="is-flex items-center content-center">
+				<div id="comment-logs" class=" width-100">
+					<p class="fs-20 fw-4 pi-8 pblc-8">Comment Logs</p>
+					<div class="feedback">
+						<div hx-get="{% url 'student:read_comment_logs' pending_advisory.id %}" hx-trigger="every .5s">
+							{% include "home/htmx/read_comment_logs.html" %}
+						</div>
+						<form method="POST">
+							{% csrf_token %}
+							<textarea name="message" id="message" cols="30" rows="1"></textarea>
+							<button type="submit">
+								<span class="material-symbols-sharp">
+									send
+								</span>
+							</button>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<script>
+		// Wait for the DOM to be fully loaded
+
+		document.addEventListener("htmx:load", function () {
+			// Get a reference to the comment logs container
+			const commentLogs = document.getElementById("feedback-logs");
+
+			// Scroll to the bottom of the container
+			commentLogs.scrollTop = commentLogs.scrollHeight;
+		});
+	</script>
+{% endblock content %}

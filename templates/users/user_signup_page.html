@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<meta name="author" content="Author Name"/>
+		<meta name="description" content="Description of the Site"/>
+		<meta name="keywords" content="Keyword for the website"/>
+
+		<link rel="icon" href="{% static 'images/TrackIt.png' %}" type="image/x-icon"/>
+
+		<title>TrackIt</title>
+
+		<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+	</head>
+
+	<body>
+		<div id="credentials">
+			<div class="wrapper">
+				<form method="POST">
+					{% csrf_token %}
+					<h2>Signup</h2>
+					{% if messages %}
+						{% for message in messages %}
+							<div style="text-align: center; color: red; padding-bottom: var(--clc-8)" class="messages m-{{message.tags}}">
+								<p>{{message}}</p>
+							</div>
+						{% endfor %}
+					{% endif %}
+
+					{% for field in form %}
+						<div class="form-group">
+							{% if field.name == 'user_role' or field.name == 'specialized_in' %}
+								{{field.label}}
+							{% endif %}
+							{{field}}
+							<small class="input-error">{{field.errors.as_text}}</small>
+						</div>
+
+					{% endfor %}
+					<input type="submit" value="Signup"/>
+				</form>
+
+				<div class="alt-links">
+					<a href="{% url 'reset_password' %}">Forget password?</a>
+					<a href="{% url 'users:login_page' %}">Login</a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

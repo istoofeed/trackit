@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="approved-titles">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="tasks.html">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">Message</h1>
+			</div>
+
+			<section id="titles">
+				<table>
+					<thead>
+						<tr>
+							<th>Message Flow</th>
+							<th>Time</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td class="is-flex items-center content-center gap-8" data-cell="task">User 1 message at their group chat</td>
+							<td data-cell="d-start">7:30 am</td>
+						</tr>
+						<tr>
+							<td class="is-flex items-center content-center gap-8" data-cell="task">User 2 message at their group chat</td>
+							<td data-cell="d-start">7:30 am</td>
+						</tr>
+						<tr>
+							<td class="is-flex items-center content-center gap-8" data-cell="task">User 3 message at their group chat</td>
+							<td data-cell="d-start">7:30 am</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

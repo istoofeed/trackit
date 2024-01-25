@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="home">
+		<!-- NAV SECTION -->
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp"> notifications </span> -->
+		</header>
+
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+
+			<section id="tasks-section" class="pblc-24">
+				<div class="is-flex items-center gap-8 mb-24">
+					<h2 class="is-section-title">Due Task</h2>
+					<span class="bold material-symbols-sharp">
+						list_alt
+					</span>
+				</div>
+
+				<div class="is-flex-column items-center content-center gap-16">
+					{% if tasks.count > 0 %}
+						{% for task in tasks %}
+							<div class="card-box width-80 is-flex items-center content-between pi-48 pblc-16">
+								<p class="task-title | fs-16 fw-4 flex-1">{{task.task.title|truncatechars:25}}</p>
+
+								{% if task.status == "Submitted" %}
+									<p class="task-due | fs-16 fw-4 is-text-center width-55">
+										Submitted
+									</p>
+
+								{% else %}
+									<p class="task-due | fs-16 fw-4 is-text-center width-55">
+										Due:
+										{{task.task.deadline}}
+									</p>
+								{% endif %}
+
+								<a class="fs-14 fw-4" href="{% url 'student:task_page' task.id %}">View</a>
+
+							</div>
+						{% endfor %}
+					{% else %}
+						<div class="card-box width-80 is-flex items-center content-center pi-48 pblc-16">
+							<p class="task-title | fs-16 fw-4">No Task Yet</p>
+
+						</div>
+					{% endif %}
+				</div>
+			</section>
+
+			<section id="announcements-section" class="pblc-24">
+				<div class="is-flex items-center gap-8 mb-24">
+					<h2 class="is-section-title">Announcement</h2>
+					<span class="fill material-symbols-sharp">
+						feedback
+					</span>
+				</div>
+
+				<div class="is-flex-column gap-24 items-center content-center">
+					{% if announcements.count > 0 %}
+						{% for announcement in announcements %}
+							<div class="card-box width-80 pblc-24 pi-48">
+								<p class="is-text-end mr-8 fw-3">{{announcement.created_at|date:"F d, Y (h: i A)"}}</p>
+
+								<p class="fs-20 fw-4 mb-8">{{announcement.header}}</p>
+
+								<div class="pi-16">
+									{{announcement.body|safe}}
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						<div class="card-box width-80 is-flex items-center content-center pi-48 pblc-16">
+							<p class="task-title | fs-16 fw-4">No Announcement Yet</p>
+
+						</div>
+					{% endif %}
+				</div>
+			</section>
+
+		</div>
+	</main>
+{% endblock content %}

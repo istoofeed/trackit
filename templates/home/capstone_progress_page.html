@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="progress">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp"> notifications </span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex content-end pblc-24 gap-16">
+				<a class="button is-long has-icon fw-2 color-reset" href="{% url 'student:guides_page' %}">
+					<p>Guides</p>
+					<span class="material-symbols-sharp">
+						format_list_bulleted
+					</span>
+				</a>
+				<a class="button is-long has-icon fw-2 color-reset" href="{% url 'student:capstone_tracker_page' group.id %}">
+					<p>Progress Tracker</p>
+					<span class="material-symbols-sharp">
+						monitoring
+					</span>
+				</a>
+			</div>
+
+			<section id="chapters-section" class="is-flex-column items-center content-center gap-24 pt-32">
+				{% for chapter in chapters %}
+					<div class="chapter">
+						<div class="chapter-box">
+							<div class="chapter-title">
+								<div class="title">
+									<span id="accordionToggler" class="fs-24 pointer material-symbols-sharp">
+										expand_more
+									</span>
+
+									<h3 class="fs-20 fw-4">{{chapter.name}}</h3>
+								</div>
+								<input type="checkbox" {% if chapter.is_done == True %} checked="checked" {% endif %} name="" id=""/>
+							</div>
+							<div class="chapter-body">
+								<div class="chapter-contents">
+									<ul>
+										{% for section in chapter.sections.all %}
+											<li>{{section.name}}</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="chapter-progress">
+							{% if chapter.is_done == True %}
+								<div class="progress-bar">
+									<div class="progress" style="--width: 100%; --bg: #2d823f"></div>
+								</div>
+								<span class="fill material-symbols-sharp">
+									check_circle
+								</span>
+							{% else %}
+								<div class="chapter-progress">
+									<div class="progress-bar">
+										<div class="progress" style="--width: {{chapter.chapter_progress}}%; --bg: #2d823f"></div>
+									</div>
+									<p>{{chapter.chapter_progress|floatformat:"0"}}%</p>
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+
+			</section>
+		</div>
+	</main>
+{% endblock content %}

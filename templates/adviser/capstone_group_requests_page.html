@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+	{% load custom_filters %}
+	{% get_pending_advisory_count request.user as pending_count %}
+	<main id="capstone-group">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">Pending Request{{pending_count|pluralize:"s"}}</h1>
+			</div>
+		</div>
+
+		<section>
+			<div class="is-flex-column items-center content-center gap-16">
+				{% for group in pending_requests %}
+					<div class="card-box width-80 is-flex items-center content-between pi-48 pblc-16">
+						<p class="task-title | fs-16 fw-4">{{group.group.name}}</p>
+
+						<p class="task-due | fs-16 fw-4 flex-1 pi-64">Title:
+							{{group.proposed_title}}</p>
+
+						<div class="is-flex gap-8">
+							<a class="request-btn" href="{% url 'adviser:request_details_page' group.id %}">Review</a>
+							<a class="request-btn red-bg" href="{% url 'adviser:reject_request' group.id %}">Reject
+								<span class="material-symbols-sharp">
+									cancel_presentation
+								</span>
+							</a>
+							<a class="request-btn" href="{% url 'adviser:accept_request' group.id %}">Accept
+								<span class="material-symbols-sharp">
+									playlist_add_check
+								</span>
+							</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	</main>
+{% endblock content %}

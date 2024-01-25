@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+	<main id="advisories">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">List of Capstone Advisory</h1>
+			</div>
+
+			<section id="group-list">
+				{% for advisory in advisories %}
+					<div class="card-box has-border pblc-32 is-flex-column items-center content-center is-text-center">
+						<p class="fs-20 fw-4 pi-16">{{advisory.group.name}}</p>
+						<div class="is-flex gap-8 pt-16">
+							<a class="request-btn" href="{% url 'adviser:groupchat_page' advisory.group.id %}">Group Chat
+								<span class="material-symbols-sharp fs-20">
+									forum
+								</span>
+							</a>
+							<a class="request-btn" href="{% url 'adviser:capstone_progress_tracker_page' advisory.group.id %}">Progress
+								<span class="material-symbols-sharp fs-20">
+									cached
+								</span>
+							</a>
+						</div>
+					</div>
+				{% endfor %}
+			</section>
+		</div>
+	</main>
+
+{% endblock content %}

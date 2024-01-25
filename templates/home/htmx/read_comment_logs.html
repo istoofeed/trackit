@@ -1,0 +1,13 @@
+<div class="feedback-logs" id="feedback-logs">
+	{% for comment in pending_advisory.pendingadvisorymessage_set.all %}
+		{% if request.user == comment.user %}
+			<p class="is-text-end">
+				<span class="primary-background">
+					{{comment.message}}</span>
+			</p>
+		{% else %}
+			<p>{{comment.user.name}}:
+				{{comment.message}}</p>
+		{% endif %}
+	{% endfor %}
+</div>

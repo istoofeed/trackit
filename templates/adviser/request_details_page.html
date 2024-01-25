@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+	<div class="pi-64 pblc-56">
+		<div class="h-100p is-flex">
+			<div class="is-flex items-center content-center width-35">
+				<div class="is-flex-column card-box has-border pi-24 width-85 h-90p">
+					<h3 class="fs-20 fw-3 is-text-center pt-64 pb-8">{{pending_advisory.proposed_title}}</h3>
+					<p class="fw-4 fs-16 is-text-center pb-32">{{pending_advisory.group.name}}</p>
+
+					<div class="is-text-center pblc-32">
+						<p class="fw-2">Members</p>
+						{% for member in pending_advisory.group.members.all %}
+							<p class="fw-3">{{member.name}}</p>
+						{% endfor %}
+					</div>
+
+					<div class="is-flex items-center content-center">
+						<a class="request-btn" href="{{pending_advisory.file.url}}" target="_blank">
+							View File
+						</a>
+					</div>
+
+					<div class="is-flex flex-1 items-end content-center gap-8 pblc-32">
+						<a class="request-btn red-bg" href="{% url 'adviser:reject_request' pending_advisory.id %}">
+							Reject
+							<span class="material-symbols-sharp">
+								cancel_presentation
+							</span>
+						</a>
+
+						<a class="request-btn" href="{% url 'adviser:accept_request' pending_advisory.id %}">
+							Accept
+							<span class="material-symbols-sharp">
+								playlist_add_check
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<section id="groupchat" class="is-flex items-center content-center flex-1">
+				<div id="feedback-section" class="h-90p width-100">
+					<div class="feedback | h-100p ">
+
+						<div hx-get="{% url 'adviser:read_comment_logs' pending_advisory.id %}" hx-trigger="every .5s">
+							{% include "adviser/htmx/read_comment_logs.html" %}
+						</div>
+
+						<form action="" method="POST">
+							{% csrf_token %}
+							<textarea name="message" id="message" cols="30" rows="1"></textarea>
+							<button type="submit">
+								<span class="material-symbols-sharp">
+									send
+								</span>
+							</button>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script>
+		// Wait for the DOM to be fully loaded
+
+		document.addEventListener("htmx:load", function () {
+			// Get a reference to the comment logs container
+			const commentLogs = document.getElementById("feedback-logs");
+
+			// Scroll to the bottom of the container
+			commentLogs.scrollTop = commentLogs.scrollHeight;
+		});
+	</script>
+{% endblock content %}

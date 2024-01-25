@@ -1,0 +1,195 @@
+form {
+	width: 30rem;
+	margin-inline: auto;
+	padding: var(--clc-24) var(--clc-40);
+	border-radius: var(--clc-8);
+	background: #212121;
+}
+
+form p.form-heading {
+	color: aliceblue;
+	font-size: var(--clc-32);
+	font-weight: var(--fw-bold);
+	text-align: center;
+	padding-block: var(--clc-16);
+}
+
+form label {
+	font-size: var(--clc-16);
+	font-weight: var(--fw-medium);
+	color: var(--color-blue-1);
+}
+
+form input,
+form select,
+form textarea {
+	padding: var(--clc-8) var(--clc-16);
+	font-size: var(--clc-16);
+	color: var(--color-gray-3);
+	border: 2px solid var(--color-border-1);
+	border-radius: var(--clc-4);
+	outline: none;
+	background-color: aliceblue;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+	border: 2px solid var(--color-blue-1);
+	color: #212121;
+	outline: none;
+}
+
+form input.error,
+form select.error,
+form textarea.error {
+	border: 2px solid var(--color-red-1);
+	color: var(--color-red-1);
+}
+
+form input.error::placeholder,
+form select.error::placeholder,
+form textarea.error::placeholder {
+	color: var(--color-light-red);
+}
+
+form input.error:focus,
+form select.error:focus,
+form textarea.error:focus {
+	color: #212121;
+}
+
+form textarea {
+	height: calc(160rem / 16);
+	resize: none;
+}
+
+form p.error-text {
+	color: var(--color-red-2);
+	font-size: var(--clc-14);
+	font-weight: var(--fw-regular);
+	padding-top: var(--clc-4);
+}
+
+form .button {
+	width: calc(96rem / 16);
+	font-size: var(--clc-14);
+	font-weight: var(--fw-medium);
+}
+
+form select.has-value option:checked {
+	color: var(--color-red-1);
+}
+
+form input.has-value,
+form select.has-value,
+form textarea.has-value {
+	color: var(--color-red-1); /* Change the text color to red */
+}
+
+form select option {
+	color: black; /* Change the text color to black for unselected options */
+}
+
+SELECT {
+	background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+	background-position: calc(100% - 0.75rem) center !important;
+	-moz-appearance: none !important;
+	-webkit-appearance: none !important;
+	appearance: none !important;
+	padding-right: 2rem !important;
+}
+
+.form-control {
+	font-family: system-ui, sans-serif;
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 1.1;
+	display: grid;
+	grid-template-columns: 1.5rem auto;
+	gap: 0.5em;
+}
+
+input[type="radio"] {
+	/* Add if not using autoprefixer */
+	-webkit-appearance: none;
+	/* Remove most all native input styles */
+	appearance: none;
+	/* For iOS < 15 */
+	background-color: white;
+	/* Not removed via appearance */
+	margin: 0;
+
+	font: inherit;
+	color: red;
+	background-color: red;
+	height: 0.5rem;
+	width: 0.5rem;
+	border: 0.15rem solid beige;
+	border-radius: 50%;
+	transform: translateY(-0.075em);
+
+	padding: 0.5rem;
+
+	display: grid;
+	place-content: center;
+}
+
+input[type="radio"]::before {
+	content: "";
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	transform: scale(0);
+	transition: 120ms transform ease-in-out;
+	box-shadow: inset 1em 1em var(--form-control-color);
+	/* Windows High Contrast Mode */
+	background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before {
+	background-color: blue;
+	transform: scale(1);
+}
+
+input[type="checkbox"] {
+	/* Add if not using autoprefixer */
+	-webkit-appearance: none;
+	/* Remove most all native input styles */
+	appearance: none;
+	/* For iOS < 15 */
+	background-color: white;
+	/* Not removed via appearance */
+	margin: 0;
+
+	font: inherit;
+	color: red;
+	background-color: red;
+	height: 0.5rem;
+	width: 0.5rem;
+	border: 0.15rem solid beige;
+	border-radius: 50%;
+	transform: translateY(-0.075em);
+
+	padding: 0.5rem;
+
+	display: grid;
+	place-content: center;
+}
+
+input[type="checkbox"]::before {
+	content: "";
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	transform: scale(0);
+	transition: 120ms transform ease-in-out;
+	box-shadow: inset 1em 1em var(--form-control-color);
+	/* Windows High Contrast Mode */
+	background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+	background-color: blue;
+	transform: scale(1);
+}

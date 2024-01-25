@@ -1,0 +1,94 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+	<main id="home">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<section id="tasks-section" class="pblc-24">
+				<div class="is-flex items-center content-between mb-24">
+					<div class="is-flex items-center gap-8">
+						<h2 class="is-section-title">Task</h2>
+						<span class="bold material-symbols-sharp">
+							list_alt
+						</span>
+					</div>
+
+					<div class="is-flex gap-8">
+						<a hx-boost="false" class="button" href="{% url 'adviser:create_task_page' %}">Add</a>
+					</div>
+				</div>
+
+				<div class="is-flex-column items-center content-center gap-16">
+					{% if tasks.count > 0 %}
+						{% for task in tasks %}
+							<div class="card-box width-80 is-flex items-center content-between pi-48 pblc-16">
+								<p class="task-title | fs-16 fw-4 flex-1">{{task.title|truncatechars:25}}</p>
+
+								<p class="task-due | fs-16 fw-4 is-text-center width-55">Due:
+									{{task.deadline|date:"F d, Y h:i A"}}</p>
+
+								<div class="is-flex gap-8">
+									<a hx-boost="false" class="fs-14 fw-4" href="{% url 'adviser:update_task_page' task.id %}">Edit</a>
+									<a class="fs-14 fw-4" data-task-id="{{task.id}}" href="{% url 'adviser:delete_task' task.id %}">Delete</a>
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						<div class="card-box width-80 is-flex items-center content-center pi-48 pblc-16">
+							<p class="task-title | fs-16 fw-4">No Task Yet</p>
+						</div>
+					{% endif %}
+				</div>
+			</section>
+
+			<section id="announcements-section" class="pblc-24">
+				<div class="is-flex items-center content-between mb-24">
+					<div class="is-flex items-center gap-8">
+						<h2 class="is-section-title">Announcement</h2>
+						<span class="fill material-symbols-sharp">
+							feedback
+						</span>
+					</div>
+
+					<div class="is-flex gap-8">
+						<a class="button" href="{% url 'adviser:create_announcement_page' %}">Add</a>
+					</div>
+				</div>
+
+				<div class="is-flex-column gap-24 items-center content-center">
+					{% if announcements.count > 0 %}
+						{% for announcement in announcements %}
+							<div class="card-box width-80 pblc-24 pi-48">
+								<div class="is-flex content-end gap-4 mb-8">
+									<a href="{% url 'adviser:update_announcement_page' announcement.id %}">
+										<span class="material-symbols-sharp">
+											edit
+										</span>
+									</a>
+									<a href="{% url 'adviser:delete_announcement' announcement.id %}">
+										<span class="material-symbols-sharp">
+											delete
+										</span>
+									</a>
+								</div>
+								<p class="is-text-end mr-8 fw-3">Posted On:
+									{{announcement.created_at|date:"F d, Y (h: i A)"}}</p>
+
+								<p class="fs-20 fw-4 mb-8">{{announcement.header}}</p>
+
+								<div class="pi-16">
+									{{announcement.body|safe}}
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						<div class="card-box width-80 is-flex items-center content-center pi-48 pblc-16">
+							<p class="task-title | fs-16 fw-4">No Announcement Yet</p>
+
+						</div>
+					{% endif %}
+				</div>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

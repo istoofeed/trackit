@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+	<main id="home">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="{% url 'adviser:usertask_details_page' usertask.id %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">Update for Revision</h1>
+			</div>
+
+			<section id="form-section" class="flatpickr">
+				<form action="" method="POST">
+					{% csrf_token %}
+                    <p class="fs-20 fw-4 pi-8 pblc-8">Comment:</p>
+                    <textarea name="comment" id="" cols="30" rows="10"></textarea>
+
+					{% for field in form %}
+						<p class="fs-20 fw-4 pi-8 pblc-8">{{field.label}}</p>
+						{{field}}
+						<small class="input-error">{{field.errors.as_text}}</small>
+					{% endfor %}
+
+					<div class="is-flex content-end gap-8 pblc-8">
+						<a href="{% url 'adviser:usertask_details_page' usertask.id %}" class="button">Cancel</a>
+						<button class="button" type="submit">Save</button>
+					</div>
+				</form>
+			</section>
+		</div>
+	</main>
+
+    <script type="text/javascript">
+        var currentDD = `{{ task.deadline|date:"F d, Y h: i A" }}`;
+    </script>
+    <script src="{% static 'js/u_datepicker.js' %}"></script>
+{% endblock content %}

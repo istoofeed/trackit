@@ -1,0 +1,21 @@
+<form method="POST">
+	{% csrf_token %}
+
+	{% if messages %}
+		{% for message in messages %}
+			<div style="text-align: center" class="messages m-{{message.tags}}">
+				<p>{{message}}</p>
+			</div>
+		{% endfor %}
+	{% endif %}
+
+	{% for field in form %}
+		<div>
+			{{field.label}}
+			{{field}}
+		</div>
+		<p class="errors">{{field.errors.as_text}}</p>
+	{% endfor %}
+	<br/>
+	<button>Submit</button>
+</form>

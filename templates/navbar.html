@@ -1,0 +1,326 @@
+{% load custom_filters %} {% load static %} {% get_pending_advisory_count request.user as pending_count %} {% user_in_advisory_group request.user as in_advisory_group %} {% get_notification_count request.user as notification_count %}
+<!--
+<header>
+	<nav class="container">
+		<!-- Logo --
+		{% if request.user|in_group:'admin' %}
+		<a class="nav_logo" href="{% url 'administrator:home_page' %}">Listdwn</a>
+		{% elif request.user|in_group:'adviser' %}
+		<a class="nav_logo" href="{% url 'adviser:home_page' %}">Listdwn</a>
+		{% else %}
+		<a class="nav_logo" href="{% url 'student:home_page' %}">Listdwn</a>
+		{% endif %}
+
+		<!-- Navigation --
+		{% if request.user|in_group:'admin' %}
+		<ul class="nav_items">
+			{% if request.user.is_authenticated %}
+			<li>
+				<a href="{% url 'users:logout' %}">Logout</a>
+			</li>
+			{% else %}
+			<li>
+				<a href="{% url 'users:login_page' %}">Login</a>
+			</li>
+			<li>
+				<a href="{% url 'users:signup_page' %}">Signup</a>
+			</li>
+			{% endif %}
+		</ul>
+
+		{% elif request.user|in_group:'adviser' %}
+		<ul class="nav_items">
+			{% if request.user.is_authenticated %}
+			<li>
+				<a href="{% url 'users:logout' %}">Logout</a>
+			</li>
+			{% else %}
+			<li>
+				<a href="{% url 'users:login_page' %}">Login</a>
+			</li>
+			<li>
+				<a href="{% url 'users:signup_page' %}">Signup</a>
+			</li>
+			{% endif %}
+		</ul>
+
+		{% else %}
+		<ul class="nav_items">
+			{% if request.user.is_authenticated %}
+			<li>
+				<a href="{% url 'users:logout' %}">Logout</a>
+			</li>
+			{% else %}
+			<li>
+				<a href="{% url 'users:login_page' %}">Login</a>
+			</li>
+			<li>
+				<a href="{% url 'users:signup_page' %}">Signup</a>
+			</li>
+			{% endif %}
+		</ul>
+		{% endif %}
+	</nav>
+</header> -->
+
+<aside class="is-full-height pi-8">
+	<div class="is-flex items-center content-around mt-32">
+		<div class="is-flex items-center gap-12">
+			<img class="logo-img" src="{% static 'images/icons8-compass-eye-100.png'%}" alt="TrackIt Logo" />
+			<p class="logo-text">TrackIt</p>
+		</div>
+
+		<span class="material-symbols-sharp" id="close-btn"> close </span>
+	</div>
+
+	<nav class="side-navigation">
+		<div class="side-profile">
+			<img src="{{request.user.profile_picture.url}}" alt="" />
+			<div>
+				<p>{{request.user.name}}</p>
+				<p>{{request.user.email}}</p>
+			</div>
+		</div>
+
+		{% if request.user|in_group:'student' %}
+		<ul>
+			<li>
+				<a href="{% url 'student:home_page' %}" class="{% if navbar == 'home' %}active{% endif %}">
+					<span class="material-symbols-sharp"> home </span>
+					<p>Home</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'student:tasks_page' %}" class="{% if navbar == 'tasks' %}active{% endif %}">
+					<span class="material-symbols-sharp"> description </span>
+					<p>Tasks</p>
+				</a>
+			</li>
+
+			{% if request.user.in_group == True %}
+			<li>
+				<a href="{% url 'student:capstone_progress_page' %}" class="{% if navbar == 'capstone_progress' %}active{% endif %}">
+					<span class="material-symbols-sharp"> cached </span>
+					<p>Capstone Progress</p>
+				</a>
+			</li>
+			{% endif %} {% if in_advisory_group %} {% else %}
+			<li>
+				<a href="{% url 'student:advisers_page' %}" class="{% if navbar == 'advisers' %}active{% endif %}">
+					<span class="material-symbols-sharp"> group </span>
+					<p>Advisers</p>
+				</a>
+			</li>
+			{% endif %}
+
+			<li>
+				<a hx-boost="false" href="{% url 'student:capstone_titles_page' %}" class="{% if navbar == 'capstone_titles' %}active{% endif %}">
+					<span class="material-symbols-sharp"> task </span>
+					<p>Approved Titles</p>
+				</a>
+			</li>
+
+			{% if request.user.in_group == True %}
+			<li>
+				<a href="{% url 'student:capstone_group_page' %}" class="{% if navbar == 'capstone_group' %}active{% endif %}">
+					<span class="material-symbols-sharp"> groups </span>
+					<p>Capstone Group</p>
+				</a>
+			</li>
+			{% endif %} {% if in_advisory_group %}
+			<li>
+				<a href="{% url 'student:groupchat_page' %}" class="{% if navbar == 'groupchat' %}active{% endif %}">
+					<span class="material-symbols-sharp"> forum </span>
+					<p>Group Chat</p>
+					<!-- <small class="message-count">26</small> -->
+				</a>
+			</li>
+			{% endif %}
+
+			<li>
+				<a href="{% url 'student:profile_page' %}" class="{% if navbar == 'profile' %}active{% endif %}">
+					<span class="material-symbols-sharp"> account_circle </span>
+					<p>Profile</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'student:notification_page' %}" class="{% if navbar == 'notification' %}active{% endif %}">
+					<span class="material-symbols-sharp"> notifications </span>
+					<p>Notifications</p>
+					{% if notification_count > 0 %}
+					<small class="message-count">{{notification_count}}</small>
+					{% endif %}
+				</a>
+			</li>
+
+			<!-- <li>
+				<a href="{% url 'student:guides_page' %}" class="{% if navbar == 'guides' %}active{% endif %}">
+					<span class="material-symbols-sharp"> format_list_bulleted </span>
+					<p>Guides</p>
+				</a>
+			</li> -->
+
+			<li>
+				<a href="{% url 'users:logout' %}">
+					<span class="material-symbols-sharp"> logout </span>
+					<p>Logout</p>
+				</a>
+			</li>
+		</ul>
+		{% elif request.user|in_group:'adviser' %}
+		<ul>
+			<li>
+				<a href="{% url 'adviser:home_page' %}" class="{% if navbar == 'home' %}active{% endif %}">
+					<span class="material-symbols-sharp"> home </span>
+					<p>Home</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'adviser:tasks_page' %}" class="{% if navbar == 'tasks' %}active{% endif %}">
+					<span class="material-symbols-sharp"> description </span>
+					<p>Tasks</p>
+				</a>
+			</li>
+
+			<!-- <li>
+				<a href="" class="{% if navbar == 'capstone_progress_tracker' %}active{% endif %}">
+					<span class="material-symbols-sharp"> cached </span>
+					<p>Capstone Progress</p>
+				</a>
+			</li> -->
+
+			<li>
+				<a href="{% url 'adviser:advisories_page' %}" class="{% if navbar == 'advisories' %}active{% endif %}">
+					<span class="material-symbols-sharp"> group </span>
+					<p>Advisory</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'adviser:guides' %}" class="{% if navbar == 'guides' %}active{% endif %}">
+					<span class="material-symbols-sharp"> edit_square </span>
+					<p>Guides</p>
+				</a>
+			</li>
+
+			<li>
+				<a hx-boost="false" href="{% url 'adviser:capstone_approved_titles_page' %}" class="{% if navbar == 'capstone_approved_titles' %}active{% endif %}">
+					<span class="material-symbols-sharp"> task </span>
+					<p>Approved Titles</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'adviser:capstone_group_requests_page' %}" class="{% if navbar == 'capstone_group_requests' %}active{% endif %}">
+					<span class="material-symbols-sharp"> groups </span>
+					<p>Pending Request{{ pending_count|pluralize:"s" }}</p>
+					{% if pending_count > 0 %}
+					<small class="message-count">{{pending_count}}</small>
+					{% endif %}
+				</a>
+			</li>
+
+			<!-- <li>
+				<a href="" class="{% if navbar == 'groupchat' %}active{% endif %}">
+					<span class="material-symbols-sharp"> forum </span>
+					<p>Group Chat</p>
+					<small class="message-count">26</small>
+				</a>
+			</li> -->
+
+			<li>
+				<a href="{% url 'adviser:profile_page' %}" class="{% if navbar == 'profile' %}active{% endif %}">
+					<span class="material-symbols-sharp"> account_circle </span>
+					<p>Profile</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'adviser:notification_page' %}" class="{% if navbar == 'notification' %}active{% endif %}">
+					<span class="material-symbols-sharp"> notifications </span>
+					<p>Notifications</p>
+					{% if notification_count > 0 %}
+					<small class="message-count">{{notification_count}}</small>
+					{% endif %}
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'users:logout' %}">
+					<span class="material-symbols-sharp"> logout </span>
+					<p>Logout</p>
+				</a>
+			</li>
+		</ul>
+		{% else %}
+		<ul>
+			<li>
+				<a href="{% url 'administrator:home_page' %}" class="{% if navbar == 'home' %}active{% endif %}">
+					<span class="material-symbols-sharp"> home </span>
+					<p>Home</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'administrator:capstone_progress_tracker_page' %}" class="{% if navbar == 'capstone_progress_tracker' %}active{% endif %}">
+					<span class="material-symbols-sharp"> description </span>
+					<p>Capstone Progress</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'administrator:advisories_page' %}" class="{% if navbar == 'advisories' %}active{% endif %}">
+					<span class="material-symbols-sharp"> group </span>
+					<p>Advisory</p>
+				</a>
+			</li>
+
+			<li>
+				<a hx-boost="false" href="{% url 'administrator:approved_capstone_titles_page' %}" class="{% if navbar == 'approved_capstone_titles' %}active{% endif %}">
+					<span class="material-symbols-sharp"> task </span>
+					<p>Approved Titles</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'administrator:capstone_group_page' %}" class="{% if navbar == 'capstone_group' %}active{% endif %}">
+					<span class="material-symbols-sharp"> groups </span>
+					<p>Capstone Group</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'administrator:guides' %}" class="{% if navbar == 'guides' %}active{% endif %}">
+					<span class="material-symbols-sharp"> edit_square </span>
+					<p>Guides</p>
+				</a>
+			</li>
+
+			<!-- <li>
+				<a href="{% url 'administrator:groupchat_page' %}" class="{% if navbar == 'groupchat' %}active{% endif %}">
+					<span class="material-symbols-sharp"> forum </span>
+					<p>Group Chat</p>
+					<small class="message-count">26</small>
+				</a>
+			</li> -->
+
+			<li>
+				<a href="{% url 'administrator:users_page' %}" class="{% if navbar == 'profile' %}active{% endif %}">
+					<span class="material-symbols-sharp"> account_circle </span>
+					<p>Users</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'users:logout' %}">
+					<span class="material-symbols-sharp"> logout </span>
+					<p>Logout</p>
+				</a>
+			</li>
+		</ul>
+		{% endif %}
+	</nav>
+</aside>

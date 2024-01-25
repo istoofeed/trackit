@@ -1,0 +1,89 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="approved-titles">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">Capstone Group</h1>
+			</div>
+
+			<div class="is-flex items-center content-between">
+				<div></div>
+
+				<div class="is-flex gap-8">
+					{% if groups.count == 0 %}
+						<a class="button is-long" href="{% url 'administrator:create_groupings' %}">Create Groupings</a>
+					{% else %}
+						{% if approved_groups > 0 %}
+							<a class="button is-long not-active" href="{% url 'administrator:approved_group_page' %}">Approved Groups</a>
+						{% endif %}
+						<a class="button is-long" href="{% url 'administrator:create_groupings' %}">Generate Again</a>
+						<a class="button is-long" href="{% url 'administrator:delete_all_groups' %}">Delete Groupings</a>
+					{% endif %}
+				</div>
+			</div>
+
+			<section id="titles">
+				{% if groups.count == 0 %}
+					<!-- <h2 class="fs-24 fw-1">No Groups yet</h2> -->
+					<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Role/Specialized</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{% for user in users_in_group %}
+								<tr>
+									<td class="is-flex items-center content-center gap-8" data-cell="task">{{user.name}}</td>
+									{% if user.user_role %}
+										<td data-cell="d-start">{{user.user_role}}</td>
+									{% elif user.specialized_in %}
+										<td data-cell="d-start">{{user.specialized_in}}</td>
+									{% endif %}
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				{% else %}
+					<table>
+						<thead>
+							<tr>
+								<th>Group Name</th>
+								<th>Members</th>
+								<th></th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							{% for group in groups %}
+								<tr>
+									<td data-cell="task">{{group.name}}</td>
+									<td data-cell="d-start">
+										{% for member in group.members.all %}
+											{{member.username}}
+											{% if not forloop.last %}
+												,
+											{% endif %}
+										{% endfor %}
+									</td>
+									<td>
+										<a href="{% url 'administrator:approved_group' group.id %}">
+											<span class="material-symbols-sharp">
+												save
+											</span>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				{% endif %}
+			</section>
+		</div>
+	</main>
+{% endblock content %}

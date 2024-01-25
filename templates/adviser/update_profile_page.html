@@ -1,0 +1,33 @@
+<div class="wrapper" hx-target="this">
+	<section class="is-flex-column items-center content-center">
+		<img class="profile-photo large" src="{{user.profile_picture.url}}" alt=""/>
+		<p class="fs-20 fw-4 pt-4">{{user.username}}</p>
+		<p class="fs-12 fw-3">{{user.user_role|title}}</p>
+	</section>
+
+	<section id="form-section">
+		<form method="post" hx-post="{% url 'adviser:update_profile_page' %}" hx-swap="outerHTML" enctype="multipart/form-data">
+			{% csrf_token %}
+
+			{% for field in form %}
+				<p class="fs-20 fw-4 pi-8 pblc-8">{{field.label}}</p>
+				{{field}}
+				<small class="input-error">{{field.errors.as_text}}</small>
+			{% endfor %}
+			<div class="is-flex content-end gap-8 pblc-8">
+				<button hx-get="{% url 'adviser:read_profile_page' %}" class="button">Cancel</button>
+				<button class="button" type="submit">Save</button>
+			</div>
+		</form>
+	</section>
+</div>
+
+<script type="text/javascript">
+	document
+		.body
+		.addEventListener('htmx:configRequest', (event) => {
+			event
+				.detail
+				.headers['X-CSRFToken'] = '{{ csrf_token }}';
+		})
+</script>

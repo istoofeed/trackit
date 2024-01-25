@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% block content %}
+	<main id="capstone-group">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp"> notifications </span> -->
+		</header>
+
+		<div class="wrapper">
+			{% if group != None %}
+				<div class="is-flex items-center pb-32">
+					<h1 class="is-page-title is-text-center flex-1">{{group.name}}</h1>
+					<a class="button" href="{% url 'student:edit_group' group.id %}">Edit</a>
+				</div>
+
+				<section id="group-members">
+					{% for member in group.members.all %}
+						<div class="card-box has-border pblc-32 is-flex-column items-center content-center is-text-center">
+							<img class="profile-photo large" src="{{member.profile_picture.url}}" alt=""/>
+
+							<p class="fs-20 fw-4 pi-16">{{member.name}}</p>
+							<p class="fs-12 fw-3">{{member.user_role|title}}</p>
+						</div>
+					{% endfor %}
+				</section>
+			{% else %}
+				<div class="is-flex items-center content-center pb-32">
+					<h1 class="is-page-title">No Group Yet</h1>
+				</div>
+			{% endif %}
+		</div>
+	</main>
+{% endblock content %}

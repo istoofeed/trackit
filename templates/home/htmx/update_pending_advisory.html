@@ -1,0 +1,28 @@
+<section id="form-section" class="width-100 pl-40" hx-target="this">
+	<form hx-post="{% url 'student:update_pending_advisory' pending_advisory.pk %}" hx-swap="outerHTML" enctype="multipart/form-data">
+		{% csrf_token %}
+
+		{% for field in form %}
+			<div class="width-100">
+				<p class="fs-20 fw-4 pi-8 pblc-8">{{field.label}}</p>
+				{{field}}
+				<small class="input-error">{{field.errors.as_text}}</small>
+			</div>
+		{% endfor %}
+
+		<div class="is-flex content-end gap-8 pblc-8">
+			<button hx-get="{% url 'student:read_pending_advisory' pending_advisory.id %}" class="button">Cancel</button>
+			<button class="button" type="submit">Save</button>
+		</div>
+	</form>
+</section>
+
+<script type="text/javascript">
+	document
+		.body
+		.addEventListener('htmx:configRequest', (event) => {
+			event
+				.detail
+				.headers['X-CSRFToken'] = '{{ csrf_token }}';
+		})
+</script>

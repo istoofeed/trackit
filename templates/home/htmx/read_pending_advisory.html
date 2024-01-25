@@ -1,0 +1,16 @@
+<section id="form-section" class="width-100 pl-40" hx-target="this" hx-swap="outerHTML">
+	<p class="fs-20 fw-4 pi-8 pblc-8">Proposed Title:</p>
+	<div class="card-box is-flex items-center content-between pi-48 pblc-16 flex-1">
+		<p>{{pending_advisory.proposed_title}}</p>
+	</div>
+
+	<p class="fs-20 fw-4 pi-8 pblc-8">File:</p>
+	<div class="card-box is-flex items-center content-between pi-48 pblc-16 flex-1">
+		<p>{{pending_advisory.file.name}}</p>
+	</div>
+
+	<div class="is-flex content-end gap-8 pblc-8">
+		<button class="button" hx-get="{% url 'student:update_pending_advisory' pending_advisory.id %}">Edit</button>
+	</div>
+</form>
+</section>

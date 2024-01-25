@@ -1,0 +1,97 @@
+#groupchat #feedback-section .comments {
+	display: grid;
+	grid-template-rows: 1fr auto;
+
+	background: var(--color-info-light);
+	width: 100%;
+	border: 2px solid black;
+	border-radius: var(--clc-8);
+	padding: var(--clc-8) var(--clc-48);
+}
+
+#groupchat #feedback-section .comments .comment-logs {
+	display: flex;
+	flex-direction: column;
+
+	padding: 0 2rem;
+	height: 30rem;
+	overflow: auto;
+}
+
+#groupchat #feedback-section .comments form {
+	display: flex;
+	align-items: center;
+	gap: var(--clc-16);
+	margin-block: var(--clc-8);
+}
+
+#groupchat #feedback-section .comments form textarea {
+	width: 100%;
+	padding: var(--clc-16) var(--clc-32);
+}
+
+#groupchat #feedback-section .feedback {
+	display: grid;
+	grid-template-rows: 1fr auto;
+
+	background: var(--color-info-light);
+	width: 100%;
+	border: 2px solid black;
+	border-radius: var(--clc-8);
+	padding-inline: var(--clc-48);
+	padding-block: var(--clc-40) var(--clc-24);
+}
+
+#groupchat #feedback-section .feedback .feedback-logs {
+	display: flex;
+	flex-direction: column;
+
+	padding: 2rem;
+	height: 60vh;
+	overflow: auto;
+}
+
+#groupchat #feedback-section .feedback form {
+	display: flex;
+	align-items: center;
+	gap: var(--clc-16);
+	margin-block: var(--clc-8);
+}
+
+#groupchat #feedback-section .feedback form textarea {
+	width: 100%;
+	padding: var(--clc-16) var(--clc-32);
+}
+
+#groupchat #comment-logs .feedback {
+	display: grid;
+	grid-template-rows: 1fr auto;
+
+	background: var(--color-info-light);
+	width: 100%;
+	border: 2px solid black;
+	border-radius: var(--clc-8);
+	padding-inline: var(--clc-48);
+	padding-block: var(--clc-40) var(--clc-24);
+}
+
+#groupchat #comment-logs .feedback .feedback-logs {
+	display: flex;
+	flex-direction: column;
+
+	padding: 2rem;
+	height: 30vh;
+	overflow: auto;
+}
+
+#groupchat #comment-logs .feedback form {
+	display: flex;
+	align-items: center;
+	gap: var(--clc-16);
+	margin-block: var(--clc-8);
+}
+
+#groupchat #comment-logs .feedback form textarea {
+	width: 100%;
+	padding: var(--clc-16) var(--clc-32);
+}

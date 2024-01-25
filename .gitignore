@@ -1,0 +1,8 @@
+env/
+__pycache__/
+.env
+db.sqlite3
+media/
+Hipo.docx
+recommendations-suggestions.docx
+Changes-for-System.docx

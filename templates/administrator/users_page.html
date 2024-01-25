@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="approved-titles">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex content-end pblc-32"></div>
+
+			<div class="is-flex items-center content-between">
+				<div class="is-flex gap-8">
+					<a class="button {% if not_active == 'students' %} not-active {% endif %}" href="{% url 'administrator:users_page' %}">Student</a>
+					<a class="button {% if not_active == 'advisers' %} not-active {% endif %}" href="{% url 'administrator:advisers_page' %}">Instructor</a>
+					<a class="button" href="{% url 'administrator:add_users' %}">Add User</a>
+					<!-- <a class="button" href="">Admin</a> -->
+				</div>
+
+				<div class="width-25">
+					{% if students == True %}
+						<div class="card-box has-border pblc-16 is-text-center">
+							<h3 class="fs-18 fw-4">Total Students Enrolled</h3>
+							<p>{{student_count}}</p>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<section id="titles">
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Role/Specialized</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						{% for user in users_in_group %}
+							<tr>
+								<td class="is-flex items-center content-center gap-8" data-cell="task">{{user.name}}</td>
+								<td data-cell="d-start">{{user.email}}</td>
+								{% if user.user_role %}
+									<td data-cell="d-start">{{user.user_role}}</td>
+								{% elif user.specialized_in %}
+									<td data-cell="d-start">{{user.specialized_in}}</td>
+								{% endif %}
+								<td>
+									<a href="{% url 'administrator:delete_user' user.id %}">
+										<span class="material-symbols-sharp">
+											delete_forever
+										</span>
+									</a>	
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

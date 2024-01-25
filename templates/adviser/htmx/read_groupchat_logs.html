@@ -1,0 +1,13 @@
+<div class="comment-logs" id="comment-logs">
+	{% for message in groupchat.groupchatmessage_set.all %}
+		{% if request.user == message.sender %}
+			<p class="is-text-end">
+				<span class="primary-background">
+					{{message.content}}</span>
+			</p>
+		{% else %}
+			<p>{{message.sender.name}}:
+				{{message.content}}</p>
+		{% endif %}
+	{% endfor %}
+</div>

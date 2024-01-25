@@ -1,0 +1,153 @@
+{% extends "index.html" %}
+{% load widget_tweaks %}
+{% block content %}
+	<main id="approved">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">Approved Capstone Titles</h1>
+			</div>
+
+			<div class="is-flex items-center content-between">
+				<div>
+					<form action="{% if request.GET %}?{% endif %}" class="is-flex gap-12" method="get" id="searchForm">
+						<div class="form-group">
+							{% render_field form.capstone_title placeholder="Search here.." %}
+						</div>
+
+						<div class="form-group">
+							{% render_field form.sort_by id="userTypeFilter" %}
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<section id="titles">
+				{% for title in approved_titles|slice:3 %}
+					<div class="title-card">
+						<div class="title-icon">
+							<span class="material-symbols-sharp">
+								assignment
+							</span>
+						</div>
+						<div class="capstone-ant">
+							<p class="capstone-title">{{title.capstone_title}}</p>
+							<p class="capstone-adviser">Members:
+								{{title.group_members}}</p>
+						</div>
+
+						<div class="capstone-members">
+							<p>{{title.capstone_adviser}}</p>
+						</div>
+
+						<div class="view-button">
+							<p class="button pointer | popup_button">View</p>
+						</div>
+
+						<div class="portfolio_item-details">
+							<p class="details_description">{{title.description}}</p>
+							<ul class="details_info">
+								<li>
+									<span>Adviser</span>
+									-
+									{{title.capstone_adviser}}</li>
+								<li>
+									<span>Members</span>
+									-
+									{{title.group_members}}</li>
+								<li>
+									<span>
+										<a href="{{title.file.url}}" target="_blank1">View File</a>
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				{% endfor %}
+
+				<div class="portfolio_popup">
+					<div class="portfolio_popup-inner">
+						<div class="portfolio_popup-content">
+							<span class="material-symbols-sharp | portfolio_popup-close">
+								close
+							</span>
+							<div class="portfolio_pop-img">
+								<span class="material-symbols-sharp">
+									assignment
+								</span>
+							</div>
+							<div class="portfolio_popup-info">
+								<div class="portfolio_popup-subtitle">TrackIt: Capstone Monitoring System With Some Really Long Name</div>
+								<div class="portfolio_popup-body">
+									<p class="details_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, molestiae voluptate! Nam ipsum reiciendis culpa doloribus minus praesentium harum aspernatur repudiandae, cumque eveniet debitis eum accusamus provident veritatis placeat dolorum quo voluptates neque ea tempore, quod maxime quasi consequuntur rem! Error dolorem sed ratione neque quaerat, deserunt molestias quis mollitia.</p>
+									<ul class="details_info">
+										<li>
+											<span>Adviser</span>
+											- Mr. Farenheight</li>
+										<li>
+											<span>Members</span>
+											- Ms. Very Long Name Long, Mr. Someone I Know, Mr. I Forgot Who this is, and Longong PakitongTong</li>
+										<li>
+											<span>
+												<a href="#">View File</a>
+											</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- <table> <thead> <tr> <th>Capstone Title</th> <th>Group</th> <th>Group Members</th> <th></th> </tr> </thead> <tbody> {% for approved_title in approved_titles %} <tr> <td data-cell="task">{{approved_title.capstone_title}}</td> <td data-cell="d-start">{{approved_title.group.name}}</td> <td data-cell="d-start"> {% for member in approved_title.group.members.all %} {{member.name}} {% if not forloop.last %} , {% endif %} {% endfor %} </td> <td> <a href="{% url 'administrator:update_approved_title_page' approved_title.id %}"> Edit&nbsp; </a> <a href="{% url 'administrator:delete_approved_title' approved_title.id %}">Delete</a> </td> </tr> {% endfor %} </tbody> </table> -->
+			</section>
+		</div>
+	</main>
+
+	<script>
+		// View More Popup
+		document.addEventListener("click", (e) => {
+			if (e.target.classList.contains("popup_button")) {
+				togglePortfolioPopup();
+
+				// portfolioItemDetails(e.target.parentElement);
+				portfolioItemDetails(e.target.closest(".title-card"));
+			}
+		});
+
+		function togglePortfolioPopup() {
+			document
+				.querySelector(".portfolio_popup")
+				.classList
+				.toggle("open");
+		}
+
+		document
+			.querySelector(".portfolio_popup-close")
+			.addEventListener("click", togglePortfolioPopup);
+
+		function portfolioItemDetails(portfolioItem) {
+			document
+				.querySelector(".portfolio_popup-subtitle")
+				.innerHTML = portfolioItem
+				.querySelector(".capstone-title")
+				.innerHTML;
+
+			document
+				.querySelector(".portfolio_popup-body")
+				.innerHTML = portfolioItem
+				.querySelector(".portfolio_item-details")
+				.innerHTML;
+		}
+
+
+		document
+			.getElementById('userTypeFilter')
+			.addEventListener('change', function () {
+				// Trigger form submission when the selection changes
+				document
+					.getElementById('searchForm')
+					.submit();
+			});
+	</script>
+{% endblock content %}

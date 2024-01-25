@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="groupchat">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp">
+				notifications
+			</span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">{{advisory.group.name}}
+					Chat Logs</h1>
+			</div>
+
+			<section id="feedback-section">
+				<div class="comments">
+					<div hx-get="{% url 'student:read_groupchat_logs' groupchat.id %}" hx-trigger="every .5s">
+						{% include "home/htmx/read_groupchat_logs.html" %}
+					</div>
+					<form action="" method="POST">
+						{% csrf_token %}
+						<textarea name="content" id="content" cols="30" rows="1"></textarea>
+						<button type="submit">
+							<span class="material-symbols-sharp">
+								send
+							</span>
+						</button>
+					</form>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<script>
+		// Wait for the DOM to be fully loaded
+
+		document.addEventListener("htmx:load", function () {
+			// Get a reference to the comment logs container
+			const commentLogs = document.getElementById("comment-logs");
+
+			// Scroll to the bottom of the container
+			commentLogs.scrollTop = commentLogs.scrollHeight;
+		});
+	</script>
+{% endblock content %}

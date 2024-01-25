@@ -1,0 +1,40 @@
+#task #status-section .status-info,
+#task #feedback-section .comments {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background: var(--color-info-light);
+	border: 2px solid black;
+}
+
+#task #status-section .status-info p {
+	border-bottom: 2px solid black;
+	padding: var(--clc-16) var(--clc-48);
+}
+
+#task #status-section .status-info p:last-child {
+	border-bottom: none;
+}
+
+#task #feedback-section .comments {
+	border-radius: var(--clc-8);
+	padding: var(--clc-8) var(--clc-48);
+}
+
+#task #feedback-section .comments p {
+	width: 100%;
+	padding-block: var(--clc-8);
+}
+
+#task #feedback-section .comments form {
+	display: flex;
+	align-items: center;
+	gap: var(--clc-16);
+	margin-block: var(--clc-8);
+}
+
+#task #feedback-section .comments form textarea {
+	font-size: var(--clc-14);
+	width: 100%;
+	padding: var(--clc-16) var(--clc-32);
+}

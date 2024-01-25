@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="approved-titles">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pt-32">
+				<h1 class="is-page-title">Advisory</h1>
+			</div>
+
+			<section style="width: 90%;" id="titles">
+				<table>
+					<thead>
+						<tr>
+							<th>Group #</th>
+							<th>Members</th>
+							<th>Percentage</th>
+							<th style="width: 12%;"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						{% for group, percentage_done in groups %}
+							<tr>
+								<td data-cell="task">{{group.name}}</td>
+								<td data-cell="d-start">
+									{% for member in group.members.all %}
+										{{member.name}}
+										{% if not forloop.last %}
+											,
+										{% endif %}
+									{% endfor %}
+								</td>
+								<td data-cell="d-finish">{{percentage_done|floatformat:"0"}}%</td>
+								<td data-cell="d-finish">
+									<a style="width: 3.5rem;" href="{% url 'administrator:capstone_progress' group.id %}" class="is-flex items-center content-center button">
+										View&nbsp;
+									</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</main>
+
+{% endblock content %}

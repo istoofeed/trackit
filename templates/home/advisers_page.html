@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+	<main id="advisers">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp">
+				notifications
+			</span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pb-32">
+				<h1 class="is-page-title">List of Advisers</h1>
+			</div>
+
+			<section id="advisers-list">
+				{% for adviser in advisers %}
+					<div class="card-box has-border pblc-32 is-flex-column items-center content-center is-text-center">
+						<img class="profile-photo large" src="{{adviser.profile_picture.url}}" alt=""/>
+
+						<p class="fs-20 fw-4 pi-16">{{adviser.username}}</p>
+						<p class="fs-12 fw-3">{{adviser.specialized_in}}</p>
+
+						<div class="cta-button">
+							{% if not adviser|has_max_advisories %}
+								{% if adviser in adviser_requests %}
+									<a class="request-btn" href="{% url 'student:pending_request_page' adviser.id %}">
+
+										Pending Request
+
+										<span class="material-symbols-sharp">
+											send
+										</span>
+									</a>
+								{% else %}
+									{% if request.user.in_group == True %}
+									<a class="request-btn" href="{% url 'student:adviser_page' adviser.id %}">
+
+										Send Adviser Request
+
+										<span class="material-symbols-sharp">
+											send
+										</span>
+									</a>
+									{% endif %}
+								{% endif %}
+							{% endif %}
+						</div>
+
+					</div>
+				{% endfor %}
+			</section>
+		</div>
+	</main>
+{% endblock content %}

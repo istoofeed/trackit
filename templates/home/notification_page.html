@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="progress-tracker">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp"> notifications </span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pblc-8 gap-8">
+				<h1 class="is-page-title">Notifications</h1>
+			</div>
+			{% if notifications.count > 0 %}
+				<section id="progress-info" class="mt-8">
+					<table>
+						<tbody>
+							{% for notification in notifications %}
+								<tr>
+									<td class="fs-16 fw-4">{{notification.context}}</td>
+									<td class="fs-16 fw-4">{{notification.created_at}}</td>
+									<td class="is-flex content-center">
+										<a href="{% url 'student:delete_notification' notification.id %}">
+											<span class="material-symbols-sharp">
+												delete
+											</span>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</section>
+
+			{% else %}
+				<div class="is-flex-column items-center content-center gap-16">
+					<div class="width-100 card-box is-flex items-center content-center pi-48 pblc-16">
+						<p class="task-title | fs-16 fw-4">No Notication Yet</p>
+
+					</div>
+				</div>
+			{% endif %}
+
+		</div>
+	</main>
+{% endblock content %}

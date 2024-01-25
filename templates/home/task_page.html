@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="task">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp">
+				notifications
+			</span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="{% url 'student:tasks_page' %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">{{task.task.title}}</h1>
+			</div>
+
+			{% include "components/read_taskfile.html" %}
+
+			<section id="feedback-section">
+				<h3 class="is-section-title fs-20 mb-12">Feedbacks and Comments:</h3>
+
+				<div class="comments">
+					{% for comment in comments %}
+						<p>{{comment.user.username}}:
+							{{comment.comment}}</p>
+					{% endfor %}
+
+					<form action="" method="POST">
+						{% csrf_token %}
+						<textarea name="comment" id="comment" cols="30" rows="1"></textarea>
+						<button type="submit">
+							<span class="material-symbols-sharp">
+								send
+							</span>
+						</button>
+					</form>
+				</div>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

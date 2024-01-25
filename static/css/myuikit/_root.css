@@ -1,0 +1,87 @@
+:root {
+	--font-family-1: "Poppins", sans-serif;
+
+	--fw-light: 300;
+	--fw-regular: 400;
+	--fw-medium: 500;
+	--fw-bold: 700;
+	--fw-bolder: 900;
+
+	--border-radius-1: 0.4rem;
+
+	--color-primary: hsl(234, 77%, 69%);
+	--color-danger: #ff7782;
+	--color-success: #41f1b6;
+	--color-warning: #ffbb55;
+	--color-white: #fff;
+	--color-light: hsla(234, 38%, 65%, 0.18)
+	--color-info-dark: #7d8da1;
+	--color-info-light: #dce1eb;
+
+	--color-text: #363949;
+	--color-text-1: #727272;
+	--color-text-2: #212121;
+
+	--color-background: #f6f6f9;
+	--color-background-1: #fafbfc;
+	--color-background-2: #f5f7fa;
+
+	--color-green-1: #00bfa5;
+	--color-green-2: #03b098;
+
+	--color-orange-1: #ffc107;
+	--color-orange-2: #ffa000;
+
+	--color-gray-0: #dde6e9;
+	--color-gray-1: #edf1f2;
+	--color-gray-2: #cfdbe2;
+	--color-gray-3: #b7bac9;
+
+	--color-blue-0: #b3e5fc;
+	--color-blue-1: #29b6f6;
+	--color-blue-2: #0288d1;
+
+	--color-red-0: #ff8a80;
+	--color-red-1: #ff5252;
+	--color-red-2: #f44336;
+
+	--clc-4: calc(4rem / 16);
+	--clc-8: calc(8rem / 16);
+	--clc-12: calc(12rem / 16);
+	--clc-16: calc(16rem / 16);
+	--clc-20: calc(20rem / 16);
+	--clc-24: calc(24rem / 16);
+	--clc-28: calc(28rem / 16);
+	--clc-32: calc(32rem / 16);
+	--clc-36: calc(36rem / 16);
+	--clc-40: calc(40rem / 16);
+	--clc-48: calc(48rem / 16);
+	--clc-56: calc(56rem / 16);
+	--clc-64: calc(64rem / 16);
+	--clc-72: calc(72rem / 16);
+	--clc-80: calc(80rem / 16);
+
+	--nclc-4: calc(-4rem / 16);
+	--nclc-8: calc(-8rem / 16);
+	--nclc-12: calc(-12rem / 16);
+	--nclc-16: calc(-16rem / 16);
+	--nclc-20: calc(-20rem / 16);
+	--nclc-24: calc(-24rem / 16);
+	--nclc-28: calc(-28rem / 16);
+	--nclc-32: calc(-32rem / 16);
+	--nclc-36: calc(-36rem / 16);
+	--nclc-40: calc(-40rem / 16);
+	--nclc-48: calc(-48rem / 16);
+	--nclc-56: calc(-56rem / 16);
+	--nclc-64: calc(-64rem / 16);
+	--nclc-72: calc(-72rem / 16);
+	--nclc-80: calc(-80rem / 16);
+
+
+	--temp-color-1: #45b871;
+	--temp-color-2: #2d823f; /* links */
+	--temp-color-3: #1a462b;
+	--temp-color-4: #286b42;
+	--temp-color-5: #60c988;
+	--temp-color-6: #3db166;
+}

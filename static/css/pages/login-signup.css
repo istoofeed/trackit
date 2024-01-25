@@ -1,0 +1,85 @@
+#credentials {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#credentials .wrapper {
+	background-color: #fff;
+	padding: 2rem;
+	border-radius: 8px;
+	border: 2px solid green;
+	min-width: 320px; /* Adjust the minimum width for mobile devices */
+	width: 80%; /* Set a maximum width for larger screens */
+	max-width: 440px; /* Set a maximum width for larger screens */
+}
+
+#credentials .wrapper form h2 {
+	text-align: center;
+	padding-bottom: 1rem;
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+#credentials .wrapper form .form-group {
+	padding-bottom: 1rem;
+}
+
+#credentials .wrapper form .form-group label {
+	display: block;
+	font-size: 1rem;
+	margin-bottom: 0.25rem;
+}
+
+#credentials .wrapper form .form-group input,
+#credentials .wrapper form .form-group select {
+	display: block;
+	width: 100%;
+	padding: 0.5rem;
+	background: transparent;
+	border: 1px solid black;
+	font-size: 1rem;
+	border-radius: 3px;
+}
+
+#credentials .wrapper form .form-group input.error {
+	border: 1px solid crimson;
+}
+
+#credentials .wrapper form .form-group .input-error {
+	color: crimson;
+	font-size: 0.875rem;
+	margin-left: 0.25rem;
+	display: block;
+	margin-top: 0.25rem;
+}
+
+#credentials .wrapper form input[type="submit"] {
+	border: none;
+	background: green;
+	width: 100%;
+	padding: 0.625rem;
+	margin-top: 0.5rem;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 500;
+	border-radius: 0.25rem;
+}
+
+#credentials .wrapper .alt-links {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 1rem;
+	padding-inline: 0.25rem;
+}
+
+/* Media Query for Tablets and Mobiles */
+@media screen and (max-width: 768px) {
+	#credentials .wrapper {
+		min-width: auto;
+		width: 90%; /* Adjust the width for smaller screens */
+	}
+}

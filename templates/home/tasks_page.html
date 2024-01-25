@@ -1,0 +1,106 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="tasks">
+		<!-- NAV SECTION -->
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp">
+				notifications
+			</span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center content-center pblc-8 gap-8">
+				<h1 class="is-page-title">List of Assignment</h1>
+				<span class="fs-32 fill material-symbols-sharp">
+					assignment
+				</span>
+			</div>
+			{% if tasks.count > 0 %}
+				{% if system_tasks %}
+					<h2 class="fs-20 fw-3 is-text-center mt-24">System Tasks</h2>
+					<section id="progress-info" class="mt-8">
+						<table>
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Deadline</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								{% for task in system_tasks %}
+									<tr>
+										<td class="fs-16 fw-4">{{task.task.title|truncatechars:45}}</td>
+										<td class="fs-16 fw-4">{{task.task.deadline}}</td>
+										{% if task.status == "Not Yet Submitted" %}
+											<td class="fs-16 fw-4" style="color: #f44336">Not yet submitted</td>
+										{% elif task.status == "For Revision" %}
+											<td class="fs-16 fw-4" style="color: #f44336">For Revision</td>
+										{% else %}
+											<td class="fs-16 fw-4" style="color: #2d823f">Submitted</td>
+										{% endif %}
+										<td>
+											<a class="fs-14 fw-4" href="{% url 'student:task_page' task.id %}">View</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</section>
+				{% endif %}
+				{% if document_tasks %}
+					<h2 class="fs-20 fw-3 is-text-center mt-24">Document Tasks</h2>
+					<section id="progress-info" class="mt-8">
+						<table>
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Deadline</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								{% for task in document_tasks %}
+									<tr>
+										<td class="fs-16 fw-4">{{task.task.title|truncatechars:45}}</td>
+										<td class="fs-16 fw-4">{{task.task.deadline}}</td>
+										{% if task.status == "Not Yet Submitted" %}
+											<td class="fs-16 fw-4" style="color: #f44336">Not yet submitted</td>
+										{% elif task.status == "For Revision" %}
+											<td class="fs-16 fw-4" style="color: #f44336">For Revision</td>
+										{% else %}
+											<td class="fs-16 fw-4" style="color: #2d823f">Submitted</td>
+										{% endif %}
+										<td>
+											<a class="fs-14 fw-4" href="{% url 'student:task_page' task.id %}">View</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</section>
+				{% endif %}
+
+			{% else %}
+				<div class="is-flex-column items-center content-center gap-16">
+					<div class="width-100 card-box is-flex items-center content-center pi-48 pblc-16">
+						<p class="task-title | fs-16 fw-4">No Task Yet</p>
+
+					</div>
+				</div>
+			{% endif %}
+
+		</div>
+	</main>
+{% endblock content %}

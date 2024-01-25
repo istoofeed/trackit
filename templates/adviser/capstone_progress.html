@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="progress-tracker">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<!-- <span class="material-symbols-sharp"> notifications </span> -->
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-32">
+				<a href="{% url 'adviser:capstone_progress_tracker_page' group.id %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">Capstone Progress Tracker</h1>
+			</div>
+
+			<section id="progress-info">
+				<table>
+					<thead>
+						<tr>
+							<th>Task</th>
+							<th>Date Started</th>
+							<th>Date Finished</th>
+							<!-- <th>May 15</th> <th>June 10</th> <th>July 26</th> <th>August 12</th> -->
+						</tr>
+					</thead>
+
+					<tbody>
+						{% for chapter in chapters %}
+							<tr>
+								<td data-cell="task">{{forloop.counter}}.
+									{{chapter.name}}</td>
+								{% if chapter.date_started %}
+									<td data-cell="d-start">{{chapter.date_started}}</td>
+								{% else %}
+									<td data-cell="d-start">Not Yet Started</td>
+								{% endif %}
+
+								{% if chapter.date_ended %}
+									<td data-cell="d-finish">{{chapter.date_ended}}</td>
+								{% else %}
+									<td data-cell="d-finish">Not Yet Finished</td>
+								{% endif %}
+								<!-- <td data-cell="date" class="fill"></td> <td data-cell="date" class="fill"></td> <td data-cell="date"></td> <td data-cell="date"></td> -->
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</section>
+
+			<section id="progress-chart" class="is-flex items-center content-center pt-32">
+				<div class="card-box has-border is-flex-column items-center content-center">
+					<h3>Overall Completion</h3>
+
+					<div class="pie-chart">
+						<div class="progress {% if percentage_done < 50 %} less {% endif %}" style="--i: {{percentage_done|floatformat:1}}; --clr: var(--color-success)">
+							<p>{{percentage_done|floatformat:"0"}}%</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

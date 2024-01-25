@@ -1,0 +1,56 @@
+<div hx-target="this">
+	<section id="form-section" class="pblc-32">
+		<form method="post" hx-post="{{post_url}}" hx-swap="outerHTML" enctype="multipart/form-data">
+			<div class=" is-flex items-center content-center gap-4">
+
+				{% csrf_token %}
+
+				{% for field in form %}
+					<div class="width-100">
+						<p class="fs-20 fw-4 pi-8 pblc-8">{{field.label}}</p>
+						{{field}}
+						<small class="input-error">{{field.errors.as_text}}</small>
+					</div>
+				{% endfor %}
+
+				<div class="is-flex items-center content-center gap-4 pt-32">
+					<button hx-get="{% url 'student:read_file' task.id %}" class="button">Cancel</button>
+					<button type="submit" class="button">Save</button>
+				</div>
+
+			</div>
+		</form>
+	</section>
+
+	<section id="status-section" class="pblc-32">
+		<h3 class="is-section-title fs-20 mb-12">Details:</h3>
+
+		<div class="status-info">
+			<p>Due Date:
+				{{task.task.deadline}}</p>
+		</div>
+	</section>
+
+	<section id="status-section" class="pt-16 pb-32">
+		<h3 class="is-section-title fs-20 mb-12">Status:</h3>
+
+		<div class="status-info">
+			{% if task.is_submitted == False %}
+				<p>Status: Not yet submitted</p>
+			{% else %}
+				<p>Status: Submitted</p>
+			{% endif %}
+		</div>
+	</section>
+
+</div>
+
+<script type="text/javascript">
+	document
+		.body
+		.addEventListener('htmx:configRequest', (event) => {
+			event
+				.detail
+				.headers['X-CSRFToken'] = '{{ csrf_token }}';
+		})
+</script>

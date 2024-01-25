@@ -1,0 +1,91 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<main id="task">
+		<header class="is-flex items-center content-between pblc-8 pi-40">
+			<div class="is-flex items-center content-center gap-8">
+				<span id="menu-btn" class="material-symbols-sharp">
+					menu
+				</span>
+				<p class="logo-text">TrackIt</p>
+			</div>
+			<span class="material-symbols-sharp">
+				notifications
+			</span>
+		</header>
+
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="{% url 'adviser:users_tasks_page' usertask.task.id %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">{{usertask.task.title}}</h1>
+			</div>
+
+			<section id="form-section" class="pblc-32">
+				<div class="is-flex align items-center content-center gap-4">
+					<div class="card-box is-flex items-center content-between pi-48 pblc-16 flex-1">
+						{% if usertask.file %}
+							<p class="task-title">{{usertask.file.name}}</p>
+						{% else %}
+							<p class="task-title">None uploaded yet</p>
+						{% endif %}
+					</div>
+
+					<div class="is-flex items-center content-center gap-4">
+						<a target="_blank" href="{{usertask.file.url}}" class="button">View</a>
+					</div>
+				</div>
+			</section>
+
+			<section id="status-section" class="pblc-32">
+				<h3 class="is-section-title fs-20 mb-12">Details:</h3>
+
+				<div class="status-info">
+					<p>Due Date:
+						{{usertask.task.deadline}}</p>
+					<p>Task Type:
+						{{usertask.task.task_type}}</p>
+				</div>
+			</section>
+
+			<section id="status-section" class="pt-16 pb-32">
+				<h3 class="is-section-title fs-20 mb-12">Status:</h3>
+
+				<div class="status-info">
+					<p>Submitted By:
+						{{usertask.student.name}}</p>
+					{% if usertask.status == "Submitted" %}
+						<p>
+							<a hx-boost="false" class="button pi-8" href="{% url 'adviser:need_revision' usertask.id %}">Need Revision</a>
+						</p>
+					{% endif %}
+				</div>
+			</section>
+
+			<section id="feedback-section">
+				<h3 class="is-section-title fs-20 mb-12">Feedbacks and Comments:</h3>
+
+				<div class="comments">
+					{% for comment in comments %}
+						<p>{{comment.user.name}}:
+							{{comment.comment}}</p>
+					{% endfor %}
+
+					<form action="" method="POST">
+						{% csrf_token %}
+						<textarea name="comment" id="comment" cols="30" rows="1"></textarea>
+						<button type="submit">
+							<span class="material-symbols-sharp">
+								send
+							</span>
+						</button>
+					</form>
+				</div>
+			</section>
+		</div>
+	</main>
+{% endblock content %}

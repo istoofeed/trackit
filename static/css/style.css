@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+/* CSS Root n Reset */
+@import url(./myuikit/_root.css);
+@import url(./myuikit/_reset.css);
+
+/* Reusable */
+@import url(./myuikit/_texts.css);
+@import url(./myuikit/_spacing.css);
+/* @import url(./myuikit/_forms.css); */
+@import url(./myuikit/_flexbox.css);
+@import url(./myuikit/_reusable.css);
+
+/* Pages */
+@import url(./pages/_main-layout.css);
+@import url(./pages/login-signup.css);
+@import url(./pages/tasks-page.css);
+@import url(./pages/progress-page.css);
+@import url(./pages/adviser-page.css);
+@import url(./pages/capstone-title-page.css);
+@import url(./pages/groupchat-page.css);
+@import url(./pages/adviser-capstone-title-page.css);
+@import url(./pages/approved_titles.css);
+
+#form-section form {
+	width: 100%;
+}
+
+#form-section form input,
+#form-section form select,
+#form-section form textarea {
+	width: 100%;
+	padding-block: var(--clc-16);
+	padding-inline: var(--clc-48);
+	background: var(--color-info-light);
+	border-radius: var(--clc-8);
+	border: 2px solid black;
+	font-size: var(--clc-16);
+}
+
+#form-section form textarea {
+	height: calc(160rem / 16);
+	resize: none;
+}
+
+#form-section form input.error,
+#form-section form select.error,
+#form-section form textarea.error {
+	border: 2px solid var(--color-red-2);
+}
+
+#form-section form .input-error {
+	display: block;
+	padding-inline: var(--clc-8);
+	padding-top: var(--clc-8);
+	color: var(--color-red-2);
+}

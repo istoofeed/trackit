@@ -1,0 +1,109 @@
+{% extends "index.html" %}
+
+{% block content %}
+	<!-- <main id="progress-tracker"> <header class="is-flex items-center content-between pblc-8 pi-40"> <div class="is-flex items-center content-center gap-8"> <span id="menu-btn" class="material-symbols-sharp"> menu </span> <p class="logo-text">TrackIt</p> </div> <span class="material-symbols-sharp"> notifications </span> </header> <div class="wrapper"> <div class="is-flex items-center gap-16 mb-32"> <a href="{% url 'adviser:advisories_page' %}"> <span class="fs-32 pointer material-symbols-sharp"> keyboard_backspace </span> </a> <h1 class="is-page-title is-text-center flex-1">{{group.name}} Capstone Progress Tracker</h1> </div> <section id="progress-info"> <table> <thead> <tr> <th>Task</th> <th>Date Started</th> <th>Date Finished</th> <th>May 15</th> <th>June 10</th> <th>July 26</th> <th>August 12</th> </tr> </thead> <tbody> <tr> <td data-cell="task">1. Chapter 1</td> <td data-cell="d-start">May 15, 2023</td> <td data-cell="d-finish">June 10, 2023</td> <td data-cell="date" class="fill"></td> <td data-cell="date" class="fill"></td> <td data-cell="date"></td> <td data-cell="date"></td> </tr> <tr> <td data-cell="task">1. Chapter 2</td> <td data-cell="d-start">May 15, 2023</td> <td data-cell="d-finish">June 10, 2023</td> <td data-cell="date" class="fill"></td> <td data-cell="date" class="fill"></td> <td data-cell="date"></td> <td data-cell="date"></td> </tr> <tr> <td data-cell="task">3. Chapter 3</td> <td data-cell="d-start">July 15, 2023</td> <td data-cell="d-finish">August 10, 2023</td> <td data-cell="date"></td> <td data-cell="date"></td> <td data-cell="date" class="fill"></td> <td data-cell="date" class="fill"></td> </tr> </tbody> </table> </section> <section id="progress-chart" class="is-flex items-center content-center pt-32"> <div class="card-box has-border is-flex-column items-center content-center"> <h3>Overall Completion</h3> <div class="pie-chart"> <div class="progress" style="--i: 85; --clr: var(--color-success)"> <p>85%</p> </div> </div> </div> </section> </div> </main> -->
+
+	<main id="progress">
+
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-16">
+				<a href="{% url 'adviser:advisories_page' %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+				<h1 class="is-page-title is-text-center flex-1">{{group.name}}
+					Capstone Progress Tracker
+				</h1>
+			</div>
+
+			<div class="is-flex content-end pblc-24 gap-16">
+				<a class="button is-long has-icon fw-2 color-reset" href="{% url 'adviser:capstone_progress' group.id %}">
+					<p>Progress Tracker</p>
+					<span class="material-symbols-sharp">
+						monitoring
+					</span>
+				</a>
+			</div>
+
+			<section id="chapters-section" class="is-flex-column items-center content-center gap-24 pt-32">
+				{% for chapter in chapters %}
+					<div class="chapter">
+						<div class="chapter-box">
+							<div class="chapter-title">
+								<div class="title">
+									<span id="accordionToggler" class="fs-24 pointer material-symbols-sharp">
+										expand_more
+									</span>
+
+									<h3 class="fs-20 fw-4">{{chapter.name}}</h3>
+								</div>
+								<input type="checkbox" {% if chapter.is_done == True %} checked="checked" {% endif %} name="" id=""/>
+							</div>
+							<div class="chapter-body">
+								<div class="chapter-contents">
+									<ul>
+										{% for section in chapter.sections.all %}
+											{% if section.is_done == False %}
+												{% if forloop.first %}
+													<li style="padding-bottom: .5rem;" class="is-flex items-center content-between">{{section.name}}
+														<a class="button is-pill" href="{% url 'adviser:first_section_done' section.id %}">
+															<span class="material-symbols-sharp">
+																done
+															</span>
+														</a>
+													</li>
+												{% elif forloop.last %}
+													<li style="padding-bottom: .5rem;" class="is-flex items-center content-between">{{section.name}}
+														<a class="button is-pill" href="{% url 'adviser:last_section_done' section.id %}">
+															<span class="material-symbols-sharp">
+																done
+															</span>
+														</a>
+													</li>
+												{% else %}
+													<li style="padding-bottom: .5rem;" class="is-flex items-center content-between">{{section.name}}
+														<a class="button is-pill" href="{% url 'adviser:section_done' section.id %}">
+															<span class="material-symbols-sharp">
+																done
+															</span>
+														</a>
+													</li>
+												{% endif %}
+											{% else %}
+												<li style="padding-bottom: .5rem;" class="is-flex items-center content-between">{{section.name}}
+													<span class="fill material-symbols-sharp">
+														check_circle
+													</span>
+												</li>
+
+											{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="chapter-progress">
+							{% if chapter.is_done == True %}
+								<div class="progress-bar">
+									<div class="progress" style="--width: 100%; --bg: #2d823f"></div>
+								</div>
+								<span class="fill material-symbols-sharp">
+									check_circle
+								</span>
+							{% else %}
+								<div class="chapter-progress">
+									<div class="progress-bar">
+										<div class="progress" style="--width: {{chapter.chapter_progress}}%; --bg: #2d823f"></div>
+									</div>
+									<p>{{chapter.chapter_progress|floatformat:"0"}}%</p>
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+
+			</section>
+		</div>
+	</main>
+{% endblock content %}

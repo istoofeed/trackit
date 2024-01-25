@@ -1,0 +1,28 @@
+<div class="wrapper" hx-target="this" hx-swap="outerHTML">
+	<section class="is-flex-column items-center content-center">
+		<img class="profile-photo large" src="{{user.profile_picture.url}}" alt=""/>
+		<p class="fs-20 fw-4 pt-4">{{user.name}}</p>
+		<p class="fs-12 fw-3">{{user.user_role|title}}</p>
+	</section>
+
+	<section id="form-section">
+		<p class="fs-20 fw-4 pi-8 pblc-8">Name:</p>
+		<div class="card-box is-flex items-center content-between pi-48 pblc-16 flex-1">
+			<p>{{user.name}}</p>
+		</div>
+
+		<p class="fs-20 fw-4 pi-8 pblc-8">Email:</p>
+		<div class="card-box is-flex items-center content-between pi-48 pblc-16 flex-1">
+			<p>{{user.email}}</p>
+		</div>
+
+		<p class="fs-20 fw-4 pi-8 pblc-8">Course:</p>
+		<div class="card-box is-flex items-center content-between pi-48 pblc-16 flex-1">
+			<p>{{user.course}}</p>
+		</div>
+
+		<div class="is-flex content-end gap-8 pblc-8">
+			<button hx-get="{% url 'adviser:update_profile_page' %}" class="button">Edit</button>
+		</div>
+	</section>
+</div>

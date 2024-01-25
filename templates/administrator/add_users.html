@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+	<main id="home">
+		<!-- MAIN CONTENT -->
+		<div class="wrapper">
+			<div class="is-flex items-center gap-16 mb-24">
+				<a href="{% url 'administrator:users_page' %}">
+					<span class="fs-32 pointer material-symbols-sharp">
+						keyboard_backspace
+					</span>
+				</a>
+
+				<h1 class="is-page-title is-text-center flex-1">Add User</h1>
+			</div>
+
+			<section id="form-section">
+				<form method="POST">
+					{% csrf_token %}
+
+					{% for field in form %}
+						{% if field.name == 'user_role' or field.name == 'specialized_in' %}
+							{{field.label}}
+						{% endif %}
+						<p class="fs-20 fw-4 pi-8 pblc-8">{{field.label}}</p>
+						{{field}}
+						<small class="input-error">{{field.errors.as_text}}</small>
+					{% endfor %}
+
+					<div class="is-flex content-end gap-8 pblc-8">
+						<a href="{% url 'administrator:users_page' %}" class="button">Cancel</a>
+						<button class="button" type="submit">Save</button>
+					</div>
+				</form>
+			</section>
+		</div>
+	</main>
+
+{% endblock content %}
